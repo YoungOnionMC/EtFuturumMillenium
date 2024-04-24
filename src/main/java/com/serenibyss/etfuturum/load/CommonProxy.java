@@ -15,6 +15,7 @@ import com.serenibyss.etfuturum.recipes.EFMRecipes;
 import com.serenibyss.etfuturum.rule.EFMGameRules;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.stats.EFMStatList;
+import com.serenibyss.etfuturum.world.WorldLoading;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.Item;
@@ -53,6 +54,7 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent event) {
+        WorldLoading.initBambooPlacement();
     }
 
     public void registerItemRenderer(Item item, int meta, String id) {

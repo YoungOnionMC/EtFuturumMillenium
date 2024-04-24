@@ -22,6 +22,8 @@ public class ConfigBlocksItems {
     @Comment("Adds Smooth Stone, and changes the old Stone Slab to Smooth Stone Slab, and changes its recipe. Recommended if 'enableNewSlabs' is enabled.")
     public static boolean enableSmoothStone = true;
 
+    public static boolean enableBamboo = true;
+
     // 1.15: Buzzy Bees
 
     // 1.16: Nether Update

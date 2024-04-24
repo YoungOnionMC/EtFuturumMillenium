@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "in_air": "true"
+      },
+      "apply": {
+        "model": "etfuturum:scaffolding_unstable"
+      }
+    },
+    {
+      "when": {
+        "in_air": "false"
+      },
+      "apply": {
+        "model": "etfuturum:scaffolding_stable"
+      }
+    }
+    ]
+}

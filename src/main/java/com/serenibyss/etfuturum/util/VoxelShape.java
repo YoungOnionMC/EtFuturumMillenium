@@ -8,6 +8,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 public class VoxelShape extends AxisAlignedBB {
 
     public static final VoxelShape EMPTY = new VoxelShape(0, 0, 0, 0, 0, 0);
+    public static final VoxelShape FULL_CUBE = new VoxelShape(0, 0, 0, 16, 16, 16);
 
     /**
      * This constructor will automatically divide all parameters with 16 to satisfy AxisAlignedBB's
@@ -23,4 +24,7 @@ public class VoxelShape extends AxisAlignedBB {
     public VoxelShape(double x1, double y1, double z1, double x2, double y2, double z2) {
         super(x1 / 16, y1 / 16, z1 / 16, x2 / 16, y2 / 16, z2 / 16);
     }
+
+    public static VoxelShape empty() { return EMPTY; }
+    public static VoxelShape fullCube() { return FULL_CUBE; }
 }

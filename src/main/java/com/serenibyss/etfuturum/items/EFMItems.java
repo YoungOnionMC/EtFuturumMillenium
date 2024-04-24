@@ -1,6 +1,7 @@
 package com.serenibyss.etfuturum.items;
 
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.blocks.BlockScaffolding;
 import com.serenibyss.etfuturum.entities.passive.fish.EntityCod;
 import com.serenibyss.etfuturum.entities.passive.fish.EntityPufferfish;
 import com.serenibyss.etfuturum.entities.passive.fish.EntitySalmon;
@@ -38,6 +39,8 @@ public enum EFMItems {
     PUFFERFISH_BUCKET(MC13.fish, "pufferfish_bucket", new ItemFishBucket<>(EntityPufferfish.class, Blocks.WATER).setTranslationKey("pufferfish_bucket")),
     TROPICAL_FISH_BUCKET(MC13.fish, "tropical_fish_bucket", new ItemFishBucket<>(EntityTropicalFish.class, Blocks.WATER).setTranslationKey("tropical_fish_bucket")),
 
+
+    SCAFFOLDING(MC14.bamboo, "scaffolding_item", new ItemScaffolding().setTranslationKey("scaffolding_item")),
     ;
 
     private final Feature feature;

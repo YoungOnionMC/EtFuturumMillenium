@@ -68,6 +68,10 @@ public enum EFMBlocks {
     DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, 3, "diorite_wall")),
     ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
 
+    BAMBOO(MC14.bamboo, "bamboo", new BlockBamboo()),
+    BAMBOO_SAPLING(MC14.bamboo, "bamboo_sapling", new BlockBambooSapling()),
+    SCAFFOLDING(MC14.bamboo, "scaffolding_block", new BlockScaffolding()),
+
     ;
 
     private final Feature feature;

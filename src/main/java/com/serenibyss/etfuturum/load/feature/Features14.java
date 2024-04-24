@@ -7,6 +7,7 @@ public class Features14 extends FeatureManager {
     public final Feature barrel;
     public final Feature stonecutter;
     public final Feature smoothStone;
+    public final Feature bamboo;
 
     public Features14() {
         // initialize your features here
@@ -25,6 +26,11 @@ public class Features14 extends FeatureManager {
         smoothStone = Feature.builder("smooth_stone", this, () -> ConfigBlocksItems.enableSmoothStone)
                 .addTextures("block/smooth_stone.png")
                 .addLangOverrides("tile.stoneSlab.name", "tile.stoneSlab.stone.name")
+                .build();
+
+        bamboo = Feature.builder("bamboo", this, () -> ConfigBlocksItems.enableBamboo)
+                .addTextures("block/bamboo_stalk.png", "item/bamboo.png", "block/bamboo_stage0.png", "block/bamboo_large_leaves.png", "block/bamboo_small_leaves.png",
+                            "block/scaffolding_top.png", "block/scaffolding_side.png", "block/scaffolding_bottom.png")
                 .build();
     }
 
