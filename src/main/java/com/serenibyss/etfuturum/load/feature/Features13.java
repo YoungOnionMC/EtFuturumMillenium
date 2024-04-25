@@ -12,6 +12,8 @@ public class Features13 extends FeatureManager {
 
     public final Feature turtle;
 
+    public final Feature coral;
+
     public Features13() {
         phantom = Feature.builder("phantom", this, () -> ConfigEntities.enablePhantoms)
                 .addTextures("entity/phantom.png", "entity/phantom_eyes.png", "item/phantom_membrane.png")
@@ -72,6 +74,14 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("mob/turtle/walk", 1, 5)
                 .addNumberedSounds("mob/turtle/baby/shamble", 1, 4)
                 .addNumberedSounds("mob/turtle/swim/swim", 1, 5)
+                .build();
+
+        coral = Feature.builder("coral", this, () -> ConfigBlocksItems.enableCoral)
+                .addTextures("block/dead_brain_coral_block.png", "block/brain_coral_block.png",
+                        "block/dead_fire_coral_block.png", "block/fire_coral_block.png",
+                        "block/dead_tube_coral_block.png", "block/tube_coral_block.png",
+                        "block/dead_horn_coral_block.png", "block/horn_coral_block.png",
+                        "block/dead_bubble_coral_block.png", "block/bubble_coral_block.png")
                 .build();
     }
 

@@ -13,6 +13,7 @@ public class ConfigBlocksItems {
     public static boolean enableStripping = true;
     public static boolean enableConduit = true;
     public static boolean enableTridents = true;
+    public static boolean enableCoral = true;
 
     // 1.14: Village & Pillage
 

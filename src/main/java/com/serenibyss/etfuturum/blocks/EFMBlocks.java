@@ -68,6 +68,8 @@ public enum EFMBlocks {
     DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, 3, "diorite_wall")),
     ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
 
+    CORAL_BLOCK(MC13.coral, "coral", new BlockCoral()),
+
     ;
 
     private final Feature feature;

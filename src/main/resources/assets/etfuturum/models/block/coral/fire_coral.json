@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "etfuturum:block/fire_coral_block"
+  }
+}

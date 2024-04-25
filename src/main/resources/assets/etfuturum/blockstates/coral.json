@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "variant=tube_coral": {
+      "model": "etfuturum:coral/tube_coral"
+    },
+    "variant=dead_tube_coral" : {
+      "model": "etfuturum:coral/dead_tube_coral"
+    },
+    "variant=bubble_coral" : {
+      "model": "etfuturum:coral/bubble_coral"
+    },
+    "variant=dead_bubble_coral" : {
+      "model": "etfuturum:coral/dead_bubble_coral"
+    },
+    "variant=fire_coral" : {
+      "model": "etfuturum:coral/fire_coral"
+    },
+    "variant=dead_fire_coral" : {
+      "model": "etfuturum:coral/dead_fire_coral"
+    },
+    "variant=brain_coral" : {
+      "model": "etfuturum:coral/brain_coral"
+    },
+    "variant=dead_brain_coral" : {
+      "model": "etfuturum:coral/dead_brain_coral"
+    },
+    "variant=horn_coral" : {
+      "model": "etfuturum:coral/horn_coral"
+    },
+    "variant=dead_horn_coral" : {
+      "model": "etfuturum:coral/dead_horn_coral"
+    }
+  }
+}
