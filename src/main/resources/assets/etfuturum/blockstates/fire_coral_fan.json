@@ -1,0 +1,17 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "facing": {
+      "east": {"x": 90, "y":  90},
+      "south": {"x": -90},
+      "west": {"x": 90, "y":  270},
+      "north": {"x": 90},
+      "down": {"x": 180},
+      "up": {}
+    },
+    "dead": {
+      "false": {"model": "etfuturum:coral/fire_coral_fan_plant"},
+      "true": {"model": "etfuturum:coral/dead_fire_coral_fan_plant"}
+    }
+  }
+}

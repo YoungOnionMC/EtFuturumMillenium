@@ -54,6 +54,16 @@ tile.dead_brain_coral.name=Dead Brain Coral
 tile.brain_coral.name=Brain Coral
 tile.dead_horn_coral.name=Dead Horn Coral
 tile.horn_coral.name=Horn Coral
+tile.dead_tube_coral_fan.name=Dead Tube Coral Fan
+tile.tube_coral_fan.name=Tube Coral Fan
+tile.dead_fire_coral_fan.name=Dead Fire Coral Fan
+tile.fire_coral_fan.name=Fire Coral Fan
+tile.dead_bubble_coral_fan.name=Dead Bubble Coral Fan
+tile.bubble_coral_fan.name=Bubble Coral Fan
+tile.dead_brain_coral_fan.name=Dead Brain Coral Fan
+tile.brain_coral_fan.name=Brain Coral Fan
+tile.dead_horn_coral_fan.name=Dead Horn Coral Fan
+tile.horn_coral_fan.name=Horn Coral Fan
 
 
 # Items

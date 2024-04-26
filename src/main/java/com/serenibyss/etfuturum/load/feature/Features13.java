@@ -81,7 +81,18 @@ public class Features13 extends FeatureManager {
                         "block/dead_fire_coral_block.png", "block/fire_coral_block.png",
                         "block/dead_tube_coral_block.png", "block/tube_coral_block.png",
                         "block/dead_horn_coral_block.png", "block/horn_coral_block.png",
-                        "block/dead_bubble_coral_block.png", "block/bubble_coral_block.png")
+                        "block/dead_bubble_coral_block.png", "block/bubble_coral_block.png",
+                        "block/dead_brain_coral.png", "block/brain_coral.png",
+                        "block/dead_bubble_coral.png", "block/bubble_coral.png",
+                        "block/dead_fire_coral.png", "block/fire_coral.png",
+                        "block/dead_horn_coral.png", "block/horn_coral.png",
+                        "block/dead_tube_coral.png", "block/tube_coral.png",
+                        "block/dead_brain_coral_fan.png", "block/brain_coral_fan.png",
+                        "block/dead_bubble_coral_fan.png", "block/bubble_coral_fan.png",
+                        "block/dead_fire_coral_fan.png", "block/fire_coral_fan.png",
+                        "block/dead_horn_coral_fan.png", "block/horn_coral_fan.png",
+                        "block/dead_tube_coral_fan.png", "block/tube_coral_fan.png"
+                        )
                 .build();
     }
 

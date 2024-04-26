@@ -1,22 +1,167 @@
 package com.serenibyss.etfuturum.blocks;
 
+import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.blocks.base.EFMBlockDirectional;
+import com.serenibyss.etfuturum.util.IModelRegister;
+import git.jbredwards.fluidlogged_api.api.util.FluidState;
+import git.jbredwards.fluidlogged_api.mod.FluidloggedAPI;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.FluidRegistry;
+import org.jetbrains.annotations.Nullable;
 
-public class BlockCoralPlant extends BlockRotatedPillar {
+import java.util.Random;
+
+public class BlockCoralPlant extends EFMBlockDirectional implements IModelRegister {
     public AxisAlignedBB raytraceCoralAABB;
     public AxisAlignedBB raytraceCoralFanAABB;
 
-    private static final PropertyEnum<EnumType> VARIANT = PropertyEnum.<EnumType>create("variant", EnumType.class);
+    private String name;
+    private static final PropertyBool isDead = PropertyBool.create("dead");
+    private boolean isFan;
 
-    public BlockCoralPlant() {
-        super(Material.CORAL);
+    //private static final PropertyEnum<EnumType> VARIANT = PropertyEnum.<EnumType>create("variant", EnumType.class);
+
+    public BlockCoralPlant(String name, boolean isFan) {
+        super(new Settings(Material.CORAL)
+                .nonOpaque()
+                .nonFullCube());
+        this.name = name;
+        this.isFan = isFan;
     }
 
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[]{FACING, isDead});
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return NULL_AABB;
+    }
+
+    @Override
+    public boolean isWaterloggable(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        items.add(new ItemStack(this, 1, 0));
+        items.add(new ItemStack(this, 1, 8));
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(isDead) ? 1 : 0;
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if(!this.canLive(worldIn, pos)) {
+            worldIn.setBlockState(pos, state.withProperty(isDead, true), 2);
+        }
+    }
+
+    protected boolean canLive(IBlockAccess world, BlockPos pos) {
+        if(FluidState.get(pos).getFluid() == FluidRegistry.WATER) {
+            return true;
+        }
+
+        for(EnumFacing value : EnumFacing.VALUES) {
+            IBlockState state = world.getBlockState(pos.offset(value));
+
+            if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER || FluidState.get(pos.offset(value)).getFluid() == FluidRegistry.WATER) {
+                return true;
+            }
+
+
+        }
+        return false;
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        if(!this.canLive(worldIn, pos)) {
+            return state.withProperty(isDead, true);
+        }
+        return super.getActualState(state, worldIn, pos);
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        if(!isFan) {
+            if(facing != EnumFacing.UP) {
+                return Blocks.AIR.getDefaultState();
+            }
+        }
+        else {
+            if(facing == EnumFacing.DOWN) {
+                return Blocks.AIR.getDefaultState();
+            }
+        }
+
+        if(this.canLive(world, pos)) {
+            world.scheduleUpdate(pos, this.getStateFromMeta(meta).withProperty(isDead, true).getBlock(), 60 + world.rand.nextInt(40));
+        }
+
+        return this.getStateFromMeta(meta).withProperty(FACING, facing);
+    }
+
+    @Override
+    public boolean getHasItemSubtypes() {
+        return true;
+    }
+
+    @Override
+    public String getTranslationKey(int meta) {
+        boolean ded = this.getStateFromMeta(meta).getValue(isDead);
+        return String.format("tile.%s", ((ded ? "dead_" : "") + this.name));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int meta = super.getMetaFromState(state);
+        return meta |= (state.getValue(isDead) ? 1 : 0) << 3;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(isDead, ((meta & 8) >> 3 == 1)).withProperty(FACING, EnumFacing.byIndex(meta & 7));
+    }
+
+    @Override
+    public void registerModel() {
+        Item itemBlock = Item.getItemFromBlock(this);
+        ModelLoader.setCustomModelResourceLocation(itemBlock, 0, new ModelResourceLocation(new ResourceLocation(EFMTags.MODID, name + "_plant"), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(itemBlock, 8, new ModelResourceLocation(new ResourceLocation(EFMTags.MODID, "dead_" + name + "_plant"), "inventory"));
+    }
+
+    /*
     public enum EnumType implements IStringSerializable {
         TUBE_CORAL(0, "tube_coral"),
         BRAIN_CORAL(1, "brain_coral"),
@@ -89,4 +234,7 @@ public class BlockCoralPlant extends BlockRotatedPillar {
             }
         }
     }
+
+    */
+
 }

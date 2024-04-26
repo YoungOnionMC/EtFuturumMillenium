@@ -4,6 +4,7 @@ import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.blocks.base.IMultiItemBlock;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import git.jbredwards.fluidlogged_api.api.capability.IFluidStateCapability;
+import git.jbredwards.fluidlogged_api.api.util.FluidState;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -21,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.FluidRegistry;
 
 import java.util.Random;
 
@@ -72,11 +74,18 @@ public class BlockCoral extends Block implements IModelRegister, IMultiItemBlock
     }
 
     protected boolean canLive(IBlockAccess world, BlockPos pos) {
+        if(FluidState.get(pos).getFluid() == FluidRegistry.WATER) {
+            return true;
+        }
+
         for(EnumFacing value : EnumFacing.VALUES) {
             IBlockState state = world.getBlockState(pos.offset(value));
-            if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER) {
+
+            if(state.getBlock() == Blocks.WATER || state.getBlock() == Blocks.FLOWING_WATER || FluidState.get(pos.offset(value)).getFluid() == FluidRegistry.WATER) {
                 return true;
             }
+
+
         }
         return false;
     }
@@ -88,6 +97,13 @@ public class BlockCoral extends Block implements IModelRegister, IMultiItemBlock
         }
 
         return this.getDefaultState().withProperty(VARIANT, EnumType.byMetadata(meta));
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if(!this.canLive(worldIn, pos)) {
+            worldIn.setBlockState(pos, getDeadState(state), 2);
+        }
     }
 
     @Override

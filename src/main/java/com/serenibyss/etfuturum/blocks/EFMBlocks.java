@@ -69,6 +69,16 @@ public enum EFMBlocks {
     ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
 
     CORAL_BLOCK(MC13.coral, "coral", new BlockCoral()),
+    BRAIN_CORAL_PLANT(MC13.coral, "brain_coral", new BlockCoralPlant("brain_coral", false)),
+    BUBBLE_CORAL_PLANT(MC13.coral, "bubble_coral", new BlockCoralPlant("bubble_coral", false)),
+    FIRE_CORAL_PLANT(MC13.coral, "fire_coral", new BlockCoralPlant("fire_coral", false)),
+    HORN_CORAL_PLANT(MC13.coral, "horn_coral", new BlockCoralPlant("horn_coral", false)),
+    TUBE_CORAL_PLANT(MC13.coral, "tube_coral", new BlockCoralPlant("tube_coral", false)),
+    BRAIN_CORAL_FAN_PLANT(MC13.coral, "brain_coral_fan", new BlockCoralPlant("brain_coral_fan", true)),
+    BUBBLE_CORAL_FAN_PLANT(MC13.coral, "bubble_coral_fan", new BlockCoralPlant("bubble_coral_fan", true)),
+    FIRE_CORAL_FAN_PLANT(MC13.coral, "fire_coral_fan", new BlockCoralPlant("fire_coral_fan", true)),
+    HORN_CORAL_FAN_PLANT(MC13.coral, "horn_coral_fan", new BlockCoralPlant("horn_coral_fan", true)),
+    TUBE_CORAL_FAN_PLANT(MC13.coral, "tube_coral_fan", new BlockCoralPlant("tube_coral_fan", true)),
 
     ;
 
